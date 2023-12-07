@@ -4,15 +4,10 @@ from typing import List, Optional, Union
 ops = {"+": add, "-": sub, "*": mul, "/": truediv}
 
 
-def _split_if_string(string_or_list: Union[List[str], str]) -> List[str]:
-    return string_or_list.split() if isinstance(string_or_list, str) else string_or_list
-
-
-def prefix_evaluate(prefix_equation: Union[List[str], str]) -> Optional[int]:
-    if not prefix_equation:
-        return None
-    prefix_equation = _split_if_string(prefix_equation)
+def prefix_evaluate(prefix_evaluation: List[str]) -> int:
+    pass
     value_stack = []
+    prefix_equation = prefix_equation.split()
     while prefix_equation:
         el = prefix_equation.pop()
         if el not in ops:
@@ -26,17 +21,15 @@ def prefix_evaluate(prefix_equation: Union[List[str], str]) -> Optional[int]:
     return value_stack[0]
 
 
-def to_prefix(equation: str) -> str:
-    op_stack = []
-    prefix = []
-
-    for el in equation.split()[::-1]:
-        pass
-
-    while op_stack:
-        prefix.append(op_stack.pop())
-
-    return " ".join(prefix[::-1])
+def to_prefix(equation: str) -> List[str]:
+    pass
+    token_stack = []
+    prefix_tokens = []
+    tokens = list(reversed(equation.split()))
+    while tokens:
+        token = tokens.pop()
+        
+    return prefix_tokens
 
 
 def calculate(equation: str) -> int:
