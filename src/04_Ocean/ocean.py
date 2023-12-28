@@ -15,7 +15,13 @@ class Ocean:
         return f"{self.__class__.__name__}({self.state!r})"
 
     def gen_next_quantum(self) -> "Ocean":
-        raise NotImplementedError
+        next_state = []
+        for row in self.state:
+            next_row = []
+            for el in row:
+                next_row.append(el + 1)
+            next_state.append(next_row)
+        return Ocean(init_state = next_state)
 
 
 if __name__ == "__main__":
