@@ -1,22 +1,21 @@
 from ocean import Ocean
+from typing import ClassVar
 
+class TestOcean:
+    init_state: ClassVar[list[list[int]]] = [[0, 2, 0, 1, 3], [0, 2, 0, 3, 3], [0, 2, 2, 2, 1], [2, 1, 2, 0, 3], [3, 3, 1, 3, 3]]
+    next_state: ClassVar[list[list[int]]] = [[0, 0, 0, 1, 3], [2, 2, 0, 3, 3], [2, 0, 0, 2, 1], [0, 1, 2, 2, 3], [0, 0, 1, 3, 3]]
 
-def test_ocean_init():
-    init_state = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    ocean = Ocean(init_state = init_state)
-    assert ocean.state == init_state
+    ocean = Ocean(init_state)
 
+    def test_ocean_init(self):
+        assert str(self.ocean) == "\n".join(["".join(str(el) for el in row)
+                                             for row in self.init_state])
 
-def test_ocean_repr():
-    init_state = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    ocean = Ocean(init_state = init_state)
-    expected_repr = "Ocean([[1, 2, 3], [4, 5, 6], [7, 8, 9]])"
-    assert repr(ocean) == expected_repr
+    def test_ocean_repr(self):
+        assert self.ocean.__repr__() == f"Ocean({self.init_state!r})"
 
+    def test_ocean_step(self):
+        self.ocean = self.ocean.gen_next_quantum()
+        assert str(self.ocean) == "\n".join(["".join(str(el) for el in row)
+                                             for row in self.next_state])
 
-def test_ocean_step():
-    init_state = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    ocean = Ocean(init_state = init_state)
-    next_state = ocean.gen_next_quantum()
-    expected_next_state = [[2, 3, 4], [5, 6, 7], [8, 9, 10]]
-    assert next_state.state == expected_next_state
